@@ -1,0 +1,50 @@
+---
+# tasks file for rpi-install-unifi-controller
+- name: Rebooting the raspberry pi
+  reboot:
+
+- name: Updating the raspberry pi
+  apt:
+    update_cache: yes
+
+- name: Upgrading the raspberry pi
+  apt:
+    upgrade: yes 
+
+- name: Install haveged
+  apt:
+    name: haveged
+    state: present
+
+- name: Installing JAVA 8
+  apt:
+    name: openjdk-8-jre-headless
+    state: present
+
+- name: Adding the key of the unifi repo
+  apt_key:
+    url: https://dl.ubnt.com/unifi/unifi-repo.gpg
+    state: present
+
+- name: Adding unifi repositorie
+  apt_repository:
+    repo: deb [arch={{ arch }}] http://www.ui.com/downloads/unifi/debian stable ubiquiti
+    state: present  
+
+- name: Reload apt repositories
+  apt:
+    update_cache: yes
+
+- name: Install unifi controller
+  apt:
+    name: unifi
+    state: present
+
+- name: Stopping and disabling mongodb
+  systemd:
+    state: stopped
+    name: mongodb
+    enabled: no
+
+- name: Rebooting the raspberry py
+  reboot:

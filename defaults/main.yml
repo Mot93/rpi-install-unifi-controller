@@ -1,0 +1,4 @@
+---
+# defaults file for rpi-install-unifi-controller
+
+arch: armhf
