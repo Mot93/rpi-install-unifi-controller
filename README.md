@@ -3,6 +3,15 @@ Role Name
 
 The role objective is to automate the process of installing the unifi controller on a raspberry pi.
 
+Requirements
+------------
+
+In order to use this role you need to install the community.general.modprobe plugin
+You need root privileges to run this script.
+''' YAML
+become: yes
+'''
+
 Example Playbook
 ----------------
 
@@ -10,6 +19,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: raspberry
       remote_user: pi
+      become: yes
       roles:
         - rpi-install-unifi-controller
 
